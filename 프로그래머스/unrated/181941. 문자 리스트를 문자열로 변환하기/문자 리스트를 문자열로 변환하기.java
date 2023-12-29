@@ -7,5 +7,6 @@ class Solution {
         }
         String answer = result.toString();
         return answer;
+        // return String.join("", arr);
     }
 }
