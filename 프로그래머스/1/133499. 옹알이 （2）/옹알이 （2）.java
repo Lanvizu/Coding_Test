@@ -14,6 +14,7 @@ class Solution {
                     || a.contains("11")
                     || a.contains("22")
                     || a.contains("33")
+                // String a 가 알파벳을 포함하는 경우 - matches(".*[a-z]*.") 사용해서 해결.
                     || a.matches(".*[a-z].*")) {
                 answer += 0;
             } else {
