@@ -4,8 +4,8 @@ class Solution {
         int maxA = 0;
         int lengthA = 0;
         int endA = 0;
-        int count = 0;
-        for (int i = 0; i < name.length(); i++) {
+        int length = name.length();
+        for (int i = 0; i < length; i++) {
             char charAt = name.charAt(i);
             if (charAt == 'A') {
                 lengthA += 1;
@@ -24,7 +24,7 @@ class Solution {
             }
         }
 //        1. 순서대로 + A로 끝날때
-        int lastA = name.length() - 1;
+        int lastA = length - 1;
         int lastACount = 0;
         while (name.charAt(lastA) == 'A') {
             lastA -= 1;
@@ -33,17 +33,18 @@ class Solution {
             }
             lastACount++;
         }
-        count = name.length() - 1 - lastACount;
+
+        int count = length - 1 - lastACount;
 
 //        2. 반대로 측정
-        if (name.length() > 1) {
+        if (length > 1) {
             int firstA = 1;
             while (name.charAt(firstA) == 'A') {
-                if (count > name.length() - firstA - 1) {
-                    count = name.length() - firstA - 1;
+                if (count > length - firstA - 1) {
+                    count = length - firstA - 1;
                 }
                 firstA++;
-                if (firstA == name.length()) {
+                if (firstA == length) {
                     break;
                 }
             }
@@ -53,8 +54,8 @@ class Solution {
             int a = endA - maxA;
             int b = 0;
             int c = 0;
-            if (name.length() - 1 > endA) {
-                b = name.length() - endA - 1;
+            if (length - 1 > endA) {
+                b = length - endA - 1;
             }
             if (b < a) {
                 c = b * 2 + a;
