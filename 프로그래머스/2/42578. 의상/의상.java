@@ -1,8 +1,8 @@
 import java.util.*;
 class Solution {
     public int solution(String[][] clothes) {
-        int answer = 0;
-        
+        int answer = 1;
+
         String[] total = new String[31];
         int count = 0;
         HashMap<String, Integer> map = new HashMap<>();
@@ -15,15 +15,11 @@ class Solution {
                 map.put(clothe[1], map.get(clothe[1]) + 1);
             }
         }
-        if (count > 1) {
-            int result = map.get(total[0]) + 1;
-            for (int i = 1; i < count; i++) {
-                result = result * (map.get(total[i]) + 1);
-            }
-            answer += result - 1;
-        } else {
-            answer += map.get(total[0]);
+        answer += map.get(total[0]);
+        for (int i = 1; i < count; i++) {
+            answer = answer * (map.get(total[i]) + 1);
         }
+        answer--;
         
         return answer;
     }
