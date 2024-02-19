@@ -6,7 +6,7 @@ public class Main {
         int N = scanner.nextInt();
         int K = scanner.nextInt();
 
-        int[][] a = new int[N+1][3];
+        int[][] a = new int[N + 1][3];
 
         for (int i = 0; i < N; i++) {
             int b = scanner.nextInt();
@@ -27,9 +27,7 @@ public class Main {
         int d = a[K][2];
         int count = 1;
         for (int i = 1; i <= N; i++) {
-            if (i == K) {
-                i++;
-            } else {
+            if (i != K) {
                 if (a[i][0] > b) {
                     count++;
                 } else if (a[i][0] == b) {
