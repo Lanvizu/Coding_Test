@@ -1,19 +1,17 @@
-N, K = map(int, input().split())
-coins = []
-for _ in range(N):
-    coins.append(int(input()))
-
-dp = [22222 for _ in range(K+1)]
+n,k = map(int, input().split())
+dp = [333333] * (k+1)
 dp[0] = 0
+graph = []
+for i in range(n):
+    graph.append(int(input()))
 
-for value in range(1, K+1):
-    for coin in coins:
-        if value < coin:
+for i in range(1, k+1):
+    for coin in graph:
+        if i < coin:
             continue
-        dp[value] = min(dp[value], dp[value-coin]+1)
-        
+        dp[i] = min(dp[i], dp[i - coin] + 1)
 
-if dp[K] != 22222:
-    print(dp[K])
-else:
+if dp[k] == 333333:
     print(-1)
+else:
+    print(dp[k])
