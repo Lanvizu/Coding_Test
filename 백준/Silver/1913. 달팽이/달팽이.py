@@ -45,7 +45,8 @@ for i in range(1,N):
                 tar_xy = [now[0]+1, now[1]+1]
             graph[now[0]][now[1]] = count
             count += 1
-# 마지막은 항상 y = 0인 줄 채워줘야함
+            
+# 마지막은 y = 0인 줄 채워줘야함
 if N > 1:
     for i in range(N-1):
         now[0] -= 1
