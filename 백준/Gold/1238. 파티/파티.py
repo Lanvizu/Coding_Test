@@ -2,15 +2,16 @@ import sys
 import heapq
 input = sys.stdin.readline
 
-N, M, X = map(int, input().split())
+N, M, X = map(int,input().split())
 
-# 정방향 그래프 생성
 graph = [[] for _ in range(N+1)]
 for _ in range(M):
-    a, b, c = map(int, input().split())
-    graph[a].append((b, c))
+    a,b,c = map(int, input().split())
+    # 인접 리스트를 통해서 정보 처리
+    graph[a].append((b,c))
 
 def dijkstra(start, g):
+    # 시작점에서 모든 경로 초기화
     dist = [float('inf')] * (N+1)
     dist[start] = 0
     q = [(0, start)]
@@ -28,14 +29,13 @@ def dijkstra(start, g):
     return dist
 
 # X에서 모든 정점으로의 최단 경로
-shortest_paths_from_X = dijkstra(X, graph)
+all_from_X = dijkstra(X, graph)
 
 # 모든 정점에서 X로의 최단 경로
-shortest_paths_to_X = [0] * (N+1)
+all_to_X = [0] * (N+1)
 for i in range(1, N+1):
     if i != X:
-        shortest_paths_to_X[i] = dijkstra(i, graph)[X]
+        all_to_X[i] = dijkstra(i, graph)[X]
 
-# 최대 왕복 시간 계산
-max_round_trip = max(shortest_paths_from_X[i] + shortest_paths_to_X[i] for i in range(1, N+1) if i != X)
-print(max_round_trip)
+max_t = max(all_from_X[i] + all_to_X[i] for i in range(1, N+1) if i != X)
+print(max_t)
