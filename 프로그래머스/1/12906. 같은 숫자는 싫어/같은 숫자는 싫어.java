@@ -1,29 +1,19 @@
-
 import java.util.*;
-import java.util.stream.IntStream;
-
+import java.io.*;
 public class Solution {
     public int[] solution(int []arr) {
-        
-//         StringBuilder builder = new StringBuilder();
-//         int x = arr[0];
-//         for (int i = 1; i < arr.length; i++) {
-//             if (x != arr[i]) {
-//                 builder.append(x);
-//                 x = arr[i];
-//             }
-//         }
-//         builder.append(arr[arr.length - 1]);
-
-//         String[] split = builder.toString().split("");
-//         int[] answer = new int[split.length];
-//         for (int i = 0; i < split.length; i++) {
-//             answer[i] = Integer.parseInt(split[i]);
-//         }
-int[] answer = IntStream.range(0, arr.length)
-                .filter(i -> i == 0 || arr[i - 1] != arr[i])
-                .map(i -> arr[i])
-                .toArray();
+        List<Integer> answerList = new ArrayList<>();
+        int len = arr.length;
+        HashSet<Integer> hs = new HashSet<Integer>();
+        for(int i = 0; i < len; i++){
+            int now = arr[i];
+            if(!hs.contains(now)){
+                hs.clear();
+                hs.add(now);
+                answerList.add(now);
+            }
+        }
+        int[] answer = answerList.stream().mapToInt(Integer::intValue).toArray();
         return answer;
     }
 }
