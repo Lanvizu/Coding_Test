@@ -1,20 +1,20 @@
+import java.io.*;
 import java.util.*;
+
 class Solution {
     public int solution(int[] nums) {
         int answer = 0;
-        Arrays.sort(nums);
-
-        HashSet<Integer> hashSet = new HashSet<>();
-
-        for (int i = 0; i < nums.length; i++) {
-            if (!hashSet.contains(nums[i])) {
-                hashSet.add(nums[i]);
-            }
+        int nums_len = nums.length;
+        HashSet<Integer> hs = new HashSet<Integer>();
+        for(int i = 0; i < nums_len; i++){
+            hs.add(nums[i]);
         }
-        if (nums.length / 2 <= hashSet.size()) {
-            answer = nums.length/2;
-        } else {
-            answer = hashSet.size();
+        int type = hs.size();
+        System.out.println(type);
+        if(type >= nums_len/2){
+            answer = nums_len/2;
+        }else{
+            answer = type;
         }
         return answer;
     }
