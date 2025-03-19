@@ -15,8 +15,8 @@ class Solution {
             }
         }
         List<Integer> list_key = new ArrayList<>(hm.keySet());
-        list_key.sort((o1,o2) -> hm.get(o2).compareTo(hm.get(o1)));
-        
+        // list_key.sort((o1,o2) -> hm.get(o2).compareTo(hm.get(o1)));
+        list_key.sort((o1,o2) -> hm.get(o2)-hm.get(o1));
         int result = k;
         for (int i=0; i<list_key.size(); i++){
             answer += 1;
