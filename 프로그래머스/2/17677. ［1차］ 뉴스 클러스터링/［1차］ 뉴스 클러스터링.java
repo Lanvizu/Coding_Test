@@ -15,9 +15,7 @@ class Solution {
     
     public int[] calc(List<String> l1, List<String> l2){
         HashMap<String, Integer> hs1 = new HashMap<>();
-        HashMap<String, Integer> hs2 = new HashMap<>();
         int a = 0;
-        int b = 0;
         for(int i=0; i<l1.size(); i++){
             String tar = l1.get(i);
             hs1.put(tar, hs1.getOrDefault(tar, 0) + 1);
@@ -32,12 +30,9 @@ class Solution {
                     hs1.replace(tar, val-1);
                 }
                 a++;
-            }else{
-                hs2.put(tar, hs2.getOrDefault(tar, 0) + 1);
             }
         }
-        b = l1.size() + l2.size() - a;
-        return new int[]{a,b};
+        return new int[]{a, l1.size() + l2.size() - a};
     }
     
     public List<String> change(String input){
