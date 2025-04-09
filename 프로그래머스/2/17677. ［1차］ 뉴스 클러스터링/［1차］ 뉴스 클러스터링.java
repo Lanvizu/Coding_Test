@@ -39,11 +39,11 @@ class Solution {
         char[] st = input.toCharArray();
         List<String> result = new ArrayList<>();
         for(int i=0; i<input.length()-1; i++){
-            char a = Character.toLowerCase(st[i]);
-            char b = Character.toLowerCase(st[i+1]);
-            if(!Character.isLetter(a) || !Character.isLetter(b)){
+            if(!Character.isLetter(st[i]) || !Character.isLetter(st[i+1])){
                 continue;
             }
+            char a = Character.toLowerCase(st[i]);
+            char b = Character.toLowerCase(st[i+1]);
             result.add(""+a+b);
         }
         return result;
