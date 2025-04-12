@@ -2,23 +2,17 @@ import java.util.*;
 
 class Solution {
     public int[] solution(int n, String[] words) {
-        int[] answer = {0, 0};
         HashSet<String> hs = new HashSet<>();
         hs.add(words[0]);
-        char target = words[0].charAt(words[0].length()-1);
         for(int i=1; i<words.length; i++){
-            String word = words[i];
-            if(target != word.charAt(0) || hs.contains(word)) {
-                answer[0] = (i+1) % n;
-                if(answer[0] == 0){
-                    answer[0] = n;
-                }
-                answer[1] = (int)(i / n) + 1;
-                break;
+            String now = words[i];
+            String prev = words[i-1];
+            if(hs.contains(now) 
+               || prev.charAt(prev.length()-1) != now.charAt(0)){
+                return new int[]{(i % n) + 1, (i / n) + 1};
             }
-            target = word.charAt(word.length()-1);
-            hs.add(word);
+            hs.add(now);
         }
-        return answer;
+        return new int[]{0, 0};
     }
 }
