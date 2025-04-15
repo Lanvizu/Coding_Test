@@ -19,10 +19,7 @@ class Solution {
         boolean[][] visited = new boolean[n][m];
         for(int i=0; i<n-1; i++){
             for(int j=0; j<m-1; j++){
-                if((char)graph.get(i).get(j) == '*'){
-                    continue;
-                }
-                if(!calc(graph, i, j)){
+                if((char)graph.get(i).get(j) == '*' || !calc(graph, i, j)){
                     continue;
                 }
                 for(int a=i; a<i+2; a++){
@@ -47,16 +44,14 @@ class Solution {
     }
     
     
-    public boolean calc(List<List> graph, int x, int y){
-        char now = (char)graph.get(x).get(y);
-        if(x >= graph.size()-1 || y >= graph.get(0).size()-1){
-            return false;
-        }
-        if((char)graph.get(x+1).get(y) != now || (char)graph.get(x).get(y+1) != now
-          || (char)graph.get(x+1).get(y+1) != now){
-            return false;
-        }
-        return true;
+    public boolean calc(List<List> graph, int x, int y) {
+    if (x < 0 || y < 0 || x + 1 >= graph.size() || y + 1 >= graph.get(0).size()) {
+        return false;
+    }
+    char now = (char)graph.get(x).get(y);
+    return (char)graph.get(x + 1).get(y) == now &&
+           (char)graph.get(x).get(y + 1) == now &&
+           (char)graph.get(x + 1).get(y + 1) == now;
     }
 }
 //[C, A, A, C]
