@@ -27,16 +27,9 @@ class Solution {
                 dfs(table, i, j, result);
                 result.remove(0);
                 List<List<int[]>> new_rr = rotate(result);
-                // for (List<int[]> arrs : new_rr) {
-                //     for(int[] arr:arrs){
-                //         System.out.println(Arrays.toString(arr));
-                //     }
-                // }
                 calc(new_rr);
-                // System.out.println(Arrays.deepToString(g_visited));
             }
         }
-        
         return answer;
     }
     
