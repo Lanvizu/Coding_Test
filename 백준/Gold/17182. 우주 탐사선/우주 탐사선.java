@@ -8,6 +8,7 @@ class Main {
     static int N;
     static int[][] arr;
     static int result = Integer.MAX_VALUE;
+    static boolean[] visited;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -27,32 +28,22 @@ class Main {
                 }
             }
         }
-        boolean[] visited = new boolean[N];
+        visited = new boolean[N];
         visited[K] = true;
-        dp(visited, K, 0);
+        dfs(K, 1, 0);
         System.out.println(result);
     }
 
-    public static void dp(boolean[] visited, int now, int cnt) {
-        if (cnt > result) {
-            return;
+    public static void dfs(int cur, int cnt, int cost) {
+        if (cnt == N) {
+            result = Math.min(result, cost);
+            return ;
         }
-
-        // 모든 visited가 처리된 경우에는 return
-        int visited_cnt = 0;
         for (int i = 0; i < N; i++) {
-            if (visited[i]) {
-                visited_cnt++;
-                continue;
-            }
-            boolean checkI = false;
+            if (visited[i]) continue;
             visited[i] = true;
-            dp(visited, i, cnt + arr[now][i]);
+            dfs(i, cnt + 1, cost + arr[cur][i]);
             visited[i] = false;
-        }
-        if(visited_cnt == N) {
-            result = Math.min(result, cnt);
-            return;
         }
     }
 }
