@@ -5,22 +5,24 @@ import java.lang.*;
 import java.io.*;
 
 class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int T = sc.nextInt();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int T = Integer.parseInt(br.readLine());
         for (int time = 0; time < T; time++) {
-            int n = sc.nextInt();
-            int k = sc.nextInt();
-            int t = sc.nextInt();
-            int m = sc.nextInt();
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int n = Integer.parseInt(st.nextToken());
+            int k = Integer.parseInt(st.nextToken());
+            int t = Integer.parseInt(st.nextToken());
+            int m = Integer.parseInt(st.nextToken());
 
             int[][] arr = new int[n + 1][k + 3];
             // k+1: 제출 횟수, k+2: 제출 시간
 
             for (int a = 0; a < m; a++) {
-                int i = sc.nextInt();
-                int j = sc.nextInt();
-                int s = sc.nextInt();
+                st = new StringTokenizer(br.readLine());
+                int i = Integer.parseInt(st.nextToken());
+                int j = Integer.parseInt(st.nextToken());
+                int s = Integer.parseInt(st.nextToken());
                 // 문제 풀이 수
                 arr[i][k + 1]++;
                 arr[i][k + 2] = a;
