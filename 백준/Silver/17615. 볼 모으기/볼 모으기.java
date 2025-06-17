@@ -19,62 +19,35 @@ class Main {
             answer = 0;
         } else {
             arr = input.toCharArray();
-            calcStartEnd();
-            calc('R');
-            calc('B');
+            answer = Math.min(answer, countMoves('R', true));
+            answer = Math.min(answer, countMoves('R', false));
+            answer = Math.min(answer, countMoves('B', true));
+            answer = Math.min(answer, countMoves('B', false));
         }
+//            System.out.println(Arrays.toString(arr));
+//            System.out.println(Arrays.deepToString(startAndEnd));
         System.out.println(answer);
     }
 
-    public static void calc(char target) {
-        int result = 0;
-        int start = Character.getNumericValue(startAndEnd[0][1]);
-        int end = Character.getNumericValue(startAndEnd[1][1]);
-        if (startAndEnd[0][0] == target && startAndEnd[1][0] == target) {
-            if (start >= end) {
-                result = calcArr(target, start, N);
-            } else {
-                result = calcArr(target, 0, N - end);
+    public static int countMoves(char color, boolean toLeft) {
+        int count = 0;
+
+        if (toLeft) {
+            // 왼쪽 연속된 동일색 제외
+            int i = 0;
+            while (i < N && arr[i] == color) i++;
+            for (; i < N; i++) {
+                if (arr[i] == color) count++;
             }
-        } else if (startAndEnd[0][0] == target) {
-            result = calcArr(target, start, N);
-        } else if (startAndEnd[1][0] == target) {
-            result = calcArr(target, 0, N - end);
         } else {
-            result = calcArr(target, 0, N);
+            // 오른쪽 연속된 동일색 제외
+            int i = N - 1;
+            while (i >= 0 && arr[i] == color) i--;
+            for (; i >= 0; i--) {
+                if (arr[i] == color) count++;
+            }
         }
-        answer = Math.min(result, answer);
-    }
 
-    public static int calcArr(char target, int start, int end) {
-        int result = 0;
-        for (int i = start; i < end; i++) {
-            if (arr[i] == target) {
-                result++;
-            }
-        }
-        return result;
-    }
-
-    public static void calcStartEnd() {
-        startAndEnd[0][0] = arr[0];
-        startAndEnd[1][0] = arr[N - 1];
-        int cnt1 = 1, cnt2 = 1;
-        for (int i = 1; i < N; i++) {
-            if (arr[i] == arr[0]) {
-                cnt1++;
-            } else {
-                startAndEnd[0][1] = Integer.toString(cnt1).charAt(0);
-                break;
-            }
-        }
-        for (int i = N - 2; i >= 0; i--) {
-            if (arr[i] == arr[N - 1]) {
-                cnt2++;
-            } else {
-                startAndEnd[1][1] = Integer.toString(cnt2).charAt(0);
-                break;
-            }
-        }
+        return count;
     }
 }
