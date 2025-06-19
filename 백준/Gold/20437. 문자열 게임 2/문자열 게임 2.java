@@ -16,39 +16,35 @@ class Main {
     }
 
     public static void calc(String W, int K) {
-        char[] arr = W.toCharArray();
-        List<Integer> result = new LinkedList<>();
-        HashMap<Character, List<int[]>> map = new HashMap<>();
-        for (int i = 0; i < arr.length; i++) {
-            char ch = arr[i];
-//            System.out.println(ch);
-            if (map.containsKey(ch)) {
-                int size = map.get(ch).size();
-                for (int j = 0; j < size; j++) {
-                    map.get(ch).get(j)[1]++;
-//                    System.out.println(map.get(ch).get(j)[0] + " " + map.get(ch).get(j)[1]);
-                }
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+        int cnt = -1;
+        Map<String, Queue<Integer>> map = new HashMap<>();
+        for (int i = 0; i < W.length(); i++) {
+            String s = W.substring(i, i + 1);
+            Queue<Integer> q = map.get(s);
+            if (q == null) {
+                q = new LinkedList<>();
+                q.offer(i);
+                map.putIfAbsent(s, q);
             } else {
-                map.put(ch, new ArrayList<>());
+                q.offer(i);
             }
-            map.get(ch).add(new int[]{i, 1});
-            int size = map.get(ch).size();
-            for (int j = 0; j < size; j++) {
-                if (map.get(ch).get(j)[1] == K) {
-                    result.add(i - map.get(ch).get(j)[0] + 1);
-                }
+            if (q.size() == K) {
+                min = Math.min(min, i - q.peek() + 1);
+                max = Math.max(max, i - q.peek() + 1);
+                q.poll();
+                cnt++;
             }
         }
-//        System.out.println(result);
-        printResult(result);
+        printResult(min, max, cnt);
     }
 
-    private static void printResult(List<Integer> result) {
-        if (result.isEmpty()) {
+    private static void printResult(int min, int max, int cnt) {
+        if (cnt == -1) {
             System.out.println(-1);
         } else {
-            Collections.sort(result);
-            System.out.println(result.get(0) + " " + result.get(result.size() - 1));
+            System.out.println(min + " " + max);
         }
     }
 }
