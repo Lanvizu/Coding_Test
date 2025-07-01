@@ -8,7 +8,6 @@ class Main {
     static int N, M;
     static List<int[]> hList = new ArrayList<>();
     static List<int[]> cList = new ArrayList<>();
-    static List<List<Integer>> totalList = new ArrayList<>();
     static int totalDist = Integer.MAX_VALUE;
 
     public static void main(String[] args) throws IOException {
@@ -29,16 +28,13 @@ class Main {
             }
         }
         calcM(-1, new ArrayList<>());
-        for (int i = 0; i < totalList.size(); i++) {
-            calcHouse(totalList.get(i));
-        }
         System.out.println(totalDist);
     }
 
     // cList.size()에서 중복없이 M개 뽑아내기
     public static void calcM(int now, List<Integer> result) {
         if (result.size() == M) {
-            totalList.add(new ArrayList<>(result));
+            calcHouse(result);
             return;
         }
         for (int i = now + 1; i < cList.size(); i++) {
