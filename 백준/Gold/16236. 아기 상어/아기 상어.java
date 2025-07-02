@@ -8,12 +8,12 @@ class Main {
     static int N, total;
     static int[][] dir = new int[][]{{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
     static int[][] graph;
+    static Baby baby = new Baby();
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         N = Integer.parseInt(br.readLine());
         graph = new int[N][N];
-        Baby baby = new Baby();
         for (int i = 0; i < N; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
             for (int j = 0; j < N; j++) {
@@ -26,15 +26,15 @@ class Main {
             }
         }
         while (true) {
-            if (!calc(baby)) {
+            if (!calc()) {
                 System.out.println(total);
                 break;
             }
         }
     }
 
-    public static boolean calc(Baby baby) {
-        int[][] visited = bfs(baby);
+    public static boolean calc() {
+        int[][] visited = bfs();
         int[] next = new int[]{-1, -1, Integer.MAX_VALUE};
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
@@ -57,7 +57,7 @@ class Main {
     }
 
     // 거리 계산
-    public static int[][] bfs(Baby baby) {
+    public static int[][] bfs() {
         Queue<int[]> q = new LinkedList<>();
         int[][] visited = new int[N][N];
         q.add(new int[]{baby.x, baby.y, 0});
