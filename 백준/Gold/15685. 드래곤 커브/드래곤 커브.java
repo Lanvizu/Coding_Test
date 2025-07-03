@@ -6,7 +6,6 @@ import java.io.*;
 
 class Main {
     static boolean[][] graph = new boolean[101][101];
-    // x,y (↓)(←)(↑)(→)
     static int[][] dir = new int[][]{{1, 0}, {0, -1}, {-1, 0}, {0, 1}};
 
     public static void main(String[] args) throws IOException {
@@ -44,27 +43,17 @@ class Main {
         y += dir[nDir][1];
         graph[x][y] = true;
         seq.add(nDir);
+
         for (int i = 1; i <= stage; i++) {
-            // i만큼 회전한 다음 순서
-            Queue<Integer> q = calcNext(seq);
-            while (!q.isEmpty()) {
-                int next = q.poll();
+            int size = seq.size();
+            // 역순으로 순회하면서 바로 추가
+            for (int j = size - 1; j >= 0; j--) {
+                int next = (seq.get(j) + 1) % 4;  // 시계방향 90도 회전
                 seq.add(next);
                 x += dir[next][0];
                 y += dir[next][1];
                 graph[x][y] = true;
             }
         }
-    }
-
-    public static Queue<Integer> calcNext(List<Integer> seq) {
-        Queue<Integer> q = new LinkedList<>();
-        for (int i = seq.size() - 1; i >= 0; i--) {
-            int nn = seq.get(i);
-            nn = (nn + 2) % 4 -1;
-            if (nn < 0) nn += 4;
-            q.add(nn);
-        }
-        return q;
     }
 }
