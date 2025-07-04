@@ -54,26 +54,28 @@ class Main {
     public static void calcSandStorm(int x, int y, int dir) {
         int now = arr[x][y];
         arr[x][y] = 0;
-        int result = 0;
-        int[][] ns = sandPattern[dir];
-        for (int[] nss : ns) {
-            int nx = x + nss[0];
-            int ny = y + nss[1];
-            int target = now * nss[2] / 100;
+        int remaining = now;
+        int[][] pattern = sandPattern[dir];
+
+        for (int i = 0; i < 9; i++) {
+            int nx = x + pattern[i][0];
+            int ny = y + pattern[i][1];
+            int amount = now * pattern[i][2] / 100;
+
             if (nx < 0 || ny < 0 || nx >= N || ny >= N) {
-                total += target;
+                total += amount;
             } else {
-                arr[nx][ny] += target;
+                arr[nx][ny] += amount;
             }
-            result += target;
+            remaining -= amount;
         }
-        now -= result;
+
         int nx = x + dx[dir];
         int ny = y + dy[dir];
         if (nx < 0 || ny < 0 || nx >= N || ny >= N) {
-            total += now;
+            total += remaining;
         } else {
-            arr[nx][ny] += now;
+            arr[nx][ny] += remaining;
         }
     }
 
